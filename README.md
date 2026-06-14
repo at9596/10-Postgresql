@@ -128,10 +128,10 @@ A Primary Key uniquely identifies each row in a table and prevents duplicate rec
 
 ## Tasks
 
-* [ ] Solve 20 SQL problems
-* [ ] Filter records
-* [ ] Sort records
-* [ ] Use aliases
+* [x] ~~Solve 20 SQL problems~~
+* [x] ~~Filter records~~
+* [x] ~~Sort records~~
+* [x] ~~Use aliases~~
 
 ## Interview Focus
 

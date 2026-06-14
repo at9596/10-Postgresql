@@ -1,0 +1,38 @@
+1. Select all rows from users table.
+
+``` SELECT * FROM users;```
+
+2. Select specified rows from users table.
+``` SELECT name from users;```
+
+3. Where filter:
+```
+SELECT * FROM users WHERE name = 'Abhishek';
+```
+
+4. AGGREGATE FUNCTION:
+SELECT name, COUNT(*) 
+FROM users 
+GROUP BY name;
+
+5. DISTINCT:
+SELECT DISTINCT name FROM users;
+
+6. Using alias:
+SELECT 
+    name AS user_name, 
+    email AS contact_email
+FROM users;
+
+7. ORDER BY:
+ ```
+SELECT * FROM users
+ORDER BY name DESC;
+```
+
+8. COMBINE ORDER BY and alias:
+SELECT 
+    id AS user_id, 
+    name AS user_name
+FROM users
+ORDER BY user_id DESC;
