@@ -1,0 +1,48 @@
+1. self join:
+A SELF JOIN is a regular join, but the table is joined with itself.
+ex:
+SELECT 
+    emp.name AS employee_name,
+    emp.role AS employee_role,
+    mgr.name AS manager_name
+FROM employees emp
+LEFT JOIN employees mgr 
+    ON emp.manager_id = mgr.id;
+
+2. Inner join: only reurn custons who placed order.
+SELECT 
+    c.customer_name, 
+    o.order_id, 
+    o.amount
+FROM customers c
+INNER JOIN orders o ON c.customer_id = o.customer_id;
+
+
+3. Get all customers:
+SELECT 
+    c.customer_name, 
+    o.order_id, 
+    o.amount
+FROM customers c
+LEFT JOIN orders o ON c.customer_id = o.customer_id;
+
+
+4. Get ALL customers, regardless of whether they ordered anything (LEFT JOIN
+SELECT 
+    c.customer_name, 
+    o.order_id, 
+    o.amount
+FROM customers c
+LEFT JOIN orders o ON c.customer_id = o.customer_id;
+
+5. 3 table join:
+SELECT 
+    c.customer_name,
+    o.order_id,
+    p.product_name,
+    oi.quantity,
+    (oi.quantity * p.price) AS total_item_price
+FROM customers c
+INNER JOIN orders o ON c.customer_id = o.customer_id
+INNER JOIN order_items oi ON o.order_id = oi.order_id
+INNER JOIN products p ON oi.product_id = p.product_id;
