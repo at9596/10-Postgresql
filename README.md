@@ -324,9 +324,9 @@ They increase storage and slow INSERT, UPDATE, DELETE operations.
 
 ## Tasks
 
-* [ ] Banking Transaction Example
-* [ ] Rollback Scenario
-* [ ] Isolation Level Testing
+* [x] ~~Banking Transaction Example~~
+* [x] ~~Rollback Scenario~~
+* [x] ~~Isolation Level Testing~~
 
 ## Interview Focus
 

@@ -1,0 +1,84 @@
+1. UNDERSTAND ACID:
+CREATE TABLE accounts (
+    id SERIAL PRIMARY KEY,
+    account_holder VARCHAR(100) NOT NULL,
+    balance NUMERIC(12, 2) DEFAULT 0.00,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+ALTER TABLE accounts 
+ADD CONSTRAINT check_positive_balance CHECK (balance >= 0);
+
+
+INSERT INTO accounts (account_holder, balance) VALUES 
+('Alice', 500.00),
+('Bob',   50.00);
+
+
+succefully commit all:
+-- Open a safe sandbox block
+BEGIN;
+
+-- Step A: Extract funds from Alice
+UPDATE accounts 
+SET balance = balance - 100.00 
+WHERE id = 1;
+
+-- Step B: Inject funds into Bob
+UPDATE accounts 
+SET balance = balance + 100.00 
+WHERE id = 2;
+
+-- Validate changes internally, then bake them permanently to disk
+COMMIT;
+
+
+Nothing saved into db:
+-- Step 1: Open the transaction block
+BEGIN;
+
+-- Step 2: Attempt an invalid mutation (Alice drops to -$200.00)
+UPDATE accounts 
+SET balance = balance - 600.00 
+WHERE id = 1;
+
+-- [POSTGRES TERMINAL OUTPUTS AN ERROR INSTANTLY]:
+-- ERROR: new row for relation "accounts" violates check constraint "check_positive_balance"
+-- DETAIL: Failing row contains (1, Alice, -200.00, 2026-06-14 17:04:54).
+
+-- Step 3: Attempt to proceed to Bob's deposit
+UPDATE accounts 
+SET balance = balance + 600.00 
+WHERE id = 2;
+
+-- [POSTGRES TERMINAL BLOCKS THIS QUERY]:
+-- ERROR: current transaction is aborted, commands ignored until end of transaction block
+
+-- Step 4: Discard the corrupted transaction completely
+ROLLBACK;
+
+
+2. Concurrency:
+window : 1
+    BEGIN;
+
+    -- Select Alice's record and place an exclusive lock on her row
+    SELECT balance FROM accounts WHERE id = 1 FOR UPDATE;
+window 2(Simultaneous Execution)
+
+BEGIN;
+
+-- Try to modify the exact same row that Connection 1 locked
+UPDATE accounts SET balance = balance - 50.00 WHERE id = 1;
+
+-- [THE TERMINAL WAITING FOR FIRST TRANSACTION COMPLITATION]: 
+-- The cursor blinks and hangs. Connection 2 is now waiting in line.
+
+Back inside Window 1:
+
+-- Complete the work and commit
+UPDATE accounts SET balance = balance - 100.00 WHERE id = 1;
+COMMIT; 
+
+-- The moment this COMMIT executes, Connection 1 drops its lock. 
+-- Connection Window #2 instantly unfreezes and executes its update safely!
