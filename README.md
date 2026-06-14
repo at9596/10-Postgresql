@@ -10,13 +10,13 @@ This repository contains daily notes, practical examples, hands-on exercises, re
 
 # 📅 Progress Tracker
 
-* [ ] Day 1 – PostgreSQL Fundamentals
-* [ ] Day 2 – SQL Querying Essentials
-* [ ] Day 3 – Joins Deep Dive
-* [ ] Day 4 – Aggregations & Grouping
-* [ ] Day 5 – Subqueries & CTEs
-* [ ] Day 6 – Window Functions
-* [ ] Day 7 – Indexing & Query Optimization
+* [x] Day 1 – ~~PostgreSQL Fundamentals~~
+* [x] Day 2 – ~~SQL Querying Essentials~~
+* [x] Day 3 – ~~Joins Deep Dive~~
+* [x] Day 4 – ~~Aggregations & Grouping~~
+* [x] Day 5 – ~~Subqueries & CTEs~~
+* [x] Day 6 – ~~Window Functions~~
+* [x] Day 7 – ~~Indexing & Query Optimization~~
 * [ ] Day 8 – Transactions & Concurrency
 * [ ] Day 9 – Database Design & Normalization
 * [ ] Day 10 – Advanced PostgreSQL
@@ -169,9 +169,9 @@ HAVING filters groups after aggregation.
 
 ## Tasks
 
-* [ ] Employee-Manager relationship
-* [ ] Customer Orders Query
-* [ ] Join 3+ tables
+* [x] ~~Employee-Manager relationship~~
+* [x] ~~Customer Orders Query~~
+* [x] ~~Join 3+ tables~~
 
 ## Interview Focus
 
@@ -201,9 +201,9 @@ LEFT JOIN returns all records from the left table plus matching rows.
 
 ## Tasks
 
-* [ ] Sales Dashboard Queries
-* [ ] Revenue Reports
-* [ ] Department Statistics
+* [x] ~~Sales Dashboard Queries~~
+* [x] ~~Revenue Reports~~
+* [x] ~~Department Statistics~~
 
 ## Interview Focus
 
@@ -230,9 +230,9 @@ GROUP BY groups records for aggregation.
 
 ## Tasks
 
-* [ ] Rewrite Subqueries as CTEs
-* [ ] Recursive Employee Hierarchy
-* [ ] Sales Ranking Query
+* [x] ~~Rewrite Subqueries as CTEs~~
+* [x] ~~Recursive Employee Hierarchy~~
+* [x] ~~Sales Ranking Query~~
 
 ## Interview Focus
 
@@ -259,7 +259,7 @@ CTEs improve readability and maintainability.
 
 ## Tasks
 
-* [ ] Top 3 Employees per Department
+* [] Top 3 Employees per Department
 * [ ] Running Totals
 * [ ] Month-over-Month Comparison
 
@@ -290,9 +290,9 @@ Window Functions retain row-level details.
 
 ## Tasks
 
-* [ ] Create Indexes
-* [ ] Compare Query Speed
-* [ ] Analyze Execution Plans
+* [x] ~~Create Indexes~~
+* [x] ~~Compare Query Speed~~
+* [x] ~~Analyze Execution Plans~~
 
 ## Interview Focus
 

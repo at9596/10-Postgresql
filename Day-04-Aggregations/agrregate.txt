@@ -1,0 +1,26 @@
+1. SELECT 
+    p.product_name,
+    COUNT(oi.order_item_id) AS total_units_sold,
+    SUM(oi.quantity * p.price) AS total_revenue,
+    AVG(oi.quantity * p.price) AS average_order_value
+FROM products p
+INNER JOIN order_items oi ON p.product_id = oi.product_id
+GROUP BY p.product_name
+ORDER BY total_revenue DESC;
+
+
+2. SELECT 
+    department,
+    COUNT(employee_name) AS total_sales_reps,
+    SUM(current_sales_volume) AS total_department_sales,
+    AVG(current_sales_volume) AS average_sales_per_rep,
+    MAX(current_sales_volume) AS highest_individual_sale
+FROM department_sales_targets
+GROUP BY department
+ORDER BY total_department_sales DESC;
+
+3. 
+SELECT department, SUM(current_sales_volume)
+FROM department_sales_targets
+GROUP BY department
+HAVING SUM(current_sales_volume) > 100000;

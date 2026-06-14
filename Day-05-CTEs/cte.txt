@@ -1,0 +1,48 @@
+1.
+SELECT customer_name, total_spent
+FROM (
+    -- Subquery calculating totals
+    SELECT c.customer_name, SUM(o.amount) AS total_spent
+    FROM customers c
+    JOIN orders o ON c.customer_id = o.customer_id
+    GROUP BY c.customer_name
+) as customer_totals
+WHERE total_spent > 100;
+
+
+clean way by cte
+
+WITH customer_totals AS (
+    SELECT c.customer_name, SUM(o.amount) AS total_spent
+    FROM customers c
+    JOIN orders o ON c.customer_id = o.customer_id
+    GROUP BY c.customer_name
+)
+SELECT customer_name, total_spent
+FROM customer_totals
+WHERE total_spent > 100;
+
+
+
+2. WITH RECURSIVE org_chart AS (
+    SELECT id, name, role, manager_id, 1 AS management_level
+    FROM employees
+    WHERE manager_id IS NULL
+    
+    UNION ALL
+    
+    SELECT e.id, e.name, e.role, e.manager_id, o.management_level + 1
+    FROM employees e
+    INNER JOIN org_chart o ON e.manager_id = o.id
+)
+SELECT * FROM org_chart ORDER BY management_level;
+
+3. SELECT 
+    department,
+    employee_name,
+    current_sales_volume,
+    DENSE_RANK() OVER (
+        PARTITION BY department 
+        ORDER BY current_sales_volume DESC
+    ) AS sales_rank_in_dept
+FROM department_sales_targets;
