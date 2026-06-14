@@ -1,0 +1,100 @@
+1. Schema vs DB
+schema is like namespace/folder that holds tables, views, functions,
+- The schema definition (tables, columns, types, constraints) is what defines structure
+- In PostgreSQL, the default schema is public
+
+"Database: we typically create table" — tables live inside schemas, which are inside databases.
+
+Visual hierarchy
+PostgreSQL Cluster (server instance)
+  └── Database 1
+      └── Schema A → tables, views
+      └── Schema B → tables, views
+  └── Database 2
+      └── Schema C → tables, views
+
+2. Tables, Rows, Columns
+
+Table defines the entity (users, products) with columns specifying data types. Holds values for all columns in that row 
+whereas columns holds the information of object, one row can have one or more columns.
+
+Table (Students)
+┌─────────┬─────┬──────┐  ← Columns (attributes)
+│ Name    │ Age │ Grade│  
+├─────────┼─────┼──────┤  
+│ Alice   │ 20  │ A    │  ← Row 1 (one record)
+│ Bob     │ 21  │ B    │  ← Row 2 (one record)
+└─────────┴─────┴──────┘
+
+3. Data Types: It tells stored data type like (Integer, String, text or json)
+   Data types ensure: storage efficiency, query performance, and data consistency 
+
+4.Primary Keys: it is a constraints  which helps we can easily unquiely identify the table.
+5. Constraints: It restricts to store  the unwanted data into database like (primary key , foreign key, unique). It helps to maintain data-integrity.
+ex:
+```
+CREATE TABLE users (
+    id INTEGER PRIMARY KEY,        -- Unique, not null
+    email TEXT UNIQUE NOT NULL,    -- Unique + required 
+    age INTEGER CHECK (age >= 18)  -- Must be 18+ 
+);
+
+```
+6. Foreign Keys: it is one type constraint and it helps to maintain relationships between two or more table.
+It is primary in one table  and foreign key in another table. It can be duplicate.
+
+-- Parent table
+CREATE TABLE users (
+    id INTEGER PRIMARY KEY,        -- Unique, not null
+    name TEXT NOT NULL
+);
+
+-- Child table with foreign key
+CREATE TABLE orders (
+    id INTEGER PRIMARY KEY,
+    user_id INTEGER FOREIGN KEY REFERENCES users(id),  -- Can be duplicate!
+    product TEXT
+);
+
+7.  Design ecommerce schema:
+
+  a. CREATE SCHEMA ecommerce;
+  b. ecommerce should have customers, categories, products, orders,ordder_items
+   lets understand it , how they related each other:
+    customers:
+    ------------------------------------------------
+    id - primary_key
+    name - not_null
+    email -> unique
+    ------------------------------------------------
+    categories
+    -----------------------------------------------
+    id
+    name
+    -----------------------------------------------
+
+    products
+    -----------------------------------------------
+    id
+    category_id REFERENCES
+    name
+    -----------------------------------------------
+
+    orders
+    -----------------------------------------------
+    id
+    customer_id REFERENCES
+    date
+    quantity
+
+    -----------------------------------------------
+
+    ordder_items
+    ----------------------
+    id
+    order_id REFERENCES
+    product_id REFERENCES
+    quantity
+    ----------------------------------------
+
+

@@ -83,16 +83,16 @@ postgresql-interview-prep/
 
 ## Official Resources
 
-* PostgreSQL Tutorial
+* [PostgreSQL Tutorial](https://neon.com/postgresql/tutorial)
 * SQL Language Basics
 
 ## Tasks
 
-* [ ] Create a Student table
-* [ ] Create a Product table
-* [ ] Add Primary Keys
-* [ ] Add Constraints
-* [ ] Design a simple E-Commerce schema
+* [x] ~~Create a Student table~~~~
+* [x] ~~Create a Product table~~
+* [x] ~~Add Primary Keys~~
+* [x] ~~Add Constraints~~
+* [x] ~~Design a simple E-Commerce schema~~
 
 ## Interview Focus
 
